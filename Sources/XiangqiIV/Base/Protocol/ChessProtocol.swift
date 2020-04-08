@@ -6,6 +6,9 @@
 //
 
 public protocol ChessProtocol {
+    
+    associatedtype Player: PlayerProtocol
+    
     var owner: Player { get }
     var moveValidator: AnyMoveValidator<Self> { get }
 }

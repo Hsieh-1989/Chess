@@ -21,7 +21,7 @@ public enum PositionStatus<Chess: ChessProtocol> {
         return chess
     }
     
-    public var owner: Player? {
+    public var owner: Chess.Player? {
         return chess?.owner
     }
 }

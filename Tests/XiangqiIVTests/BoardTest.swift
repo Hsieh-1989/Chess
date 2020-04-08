@@ -43,31 +43,35 @@ class BoardTest: XCTestCase {
     func testBoardInitialWithData() {
         
         let board = Board<Chess>(width: 3, height: 3, data: [
-            .init(x: 0, y: 0): .black,
-            .init(x: 1, y: 1): .black,
-            .init(x: 2, y: 2): .black,
-            .init(x: 0, y: 2): .red,
-            .init(x: 2, y: 0): .red
+            .init(x: 0, y: 0): .X,
+            .init(x: 1, y: 1): .X,
+            .init(x: 2, y: 2): .X,
+            .init(x: 0, y: 2): .O,
+            .init(x: 2, y: 0): .O
         ])
         
         XCTAssertEqual(
             board.data,
             [
-                [.occupied(.black), .empty, .occupied(.red)],
-                [.empty, .occupied(.black), .empty],
-                [.occupied(.red), .empty, .occupied(.black)]
+                [.occupied(.X), .empty, .occupied(.O)],
+                [.empty, .occupied(.X), .empty],
+                [.occupied(.O), .empty, .occupied(.X)]
             ]
         )
     }
     
     // MARK: Mock Chess
     private struct Chess: ChessProtocol, Equatable, CustomStringConvertible {
+        enum Player: String, PlayerProtocol {
+            case X
+            case O
+        }
         
         let owner: Player
         let moveValidator = AnyMoveValidator<Self>(validator: { _, _, _, _ in false })
         
-        static let red = Chess(owner: .red)
-        static let black = Chess(owner: .black)
+        static let X = Chess(owner: .X)
+        static let O = Chess(owner: .O)
         
         static func == (lhs: BoardTest.Chess, rhs: BoardTest.Chess) -> Bool {
             return lhs.owner == rhs.owner
@@ -75,8 +79,8 @@ class BoardTest: XCTestCase {
         
         var description: String {
             switch owner {
-            case .red: return "@"
-            case .black: return "#"
+            case .X: return "X"
+            case .O: return "O"
             }
         }
     }

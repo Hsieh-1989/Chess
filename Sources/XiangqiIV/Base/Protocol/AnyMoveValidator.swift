@@ -8,7 +8,7 @@
 public struct AnyMoveValidator<Chess: ChessProtocol>: MoveValidator {
     
     public typealias Validator = (
-        _ player: Player,
+        _ player: Chess.Player,
         _ original: Position,
         _ destination: Position,
         _ board: Board<Chess>
@@ -29,7 +29,7 @@ public struct AnyMoveValidator<Chess: ChessProtocol>: MoveValidator {
 
     // MARK: ChessMoveValidation
     public func validate(
-        player: Player,
+        player: Chess.Player,
         from original: Position,
         to destination: Position,
         on board: Board<Chess>

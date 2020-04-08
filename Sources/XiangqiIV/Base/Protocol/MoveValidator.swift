@@ -8,7 +8,7 @@
 public protocol MoveValidator {
     associatedtype Chess: ChessProtocol
     func validate(
-        player: Player,
+        player: Chess.Player,
         from original: Position,
         to destination: Position,
         on board: Board<Chess>

@@ -7,6 +7,11 @@
 
 public struct ChineseChess: ChessProtocol, Equatable {
     
+    public enum Player: String, PlayerProtocol {
+        case red
+        case black
+    }
+    
     public enum Kind: Equatable {
         case king
         case assistant

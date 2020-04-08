@@ -6,5 +6,5 @@
 //
 
 public struct WinningConditions<Chess: ChessProtocol> {
-    public let verify: (Board<Chess>) -> Player?
+    public let verify: (Board<Chess>) -> Chess.Player?
 }
