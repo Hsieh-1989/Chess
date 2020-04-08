@@ -28,3 +28,13 @@ public enum PositionStatus<Chess: ChessProtocol> {
 
 // MARK: - Equatable
 extension PositionStatus: Equatable where Chess: Equatable {}
+
+// MARK: - CustomStringConvertible
+extension PositionStatus: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .empty: return "·"
+        case let .occupied(chess): return "\(chess)"
+        }
+    }
+}
