@@ -25,3 +25,6 @@ public enum PositionStatus<Chess: ChessProtocol> {
         return chess?.owner
     }
 }
+
+// MARK: - Equatable
+extension PositionStatus: Equatable where Chess: Equatable {}
