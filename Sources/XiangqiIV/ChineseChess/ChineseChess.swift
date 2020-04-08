@@ -5,7 +5,7 @@
 //  Created by Hsieh Min Che on 2020/2/24.
 //
 
-public struct ChineseChess: Chess {
+public struct ChineseChess: ChessProtocol {
     
     public enum Kind: Equatable {
         case king

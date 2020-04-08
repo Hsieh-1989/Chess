@@ -7,7 +7,7 @@
 
 public enum PositionStatus {
     case empty
-    case occupied(Chess)
+    case occupied(ChessProtocol)
     
     public var isEmpty: Bool {
         switch self {

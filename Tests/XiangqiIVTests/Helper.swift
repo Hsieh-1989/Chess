@@ -22,7 +22,7 @@ extension Board {
         let data = array
             .joined()
             .enumerated()
-            .reduce(into: [Position: Chess]()) { result, current in
+            .reduce(into: [Position: ChessProtocol]()) { result, current in
                 let (index, character) = current
                 guard let chess = ChineseChess(rawValue: String(character)) else { return }
                 let position = Position(x: index % width, y: index / width)

@@ -28,7 +28,7 @@ public struct Board {
         )
     }
     
-    public init(width: Int, height: Int, data: [Position: Chess]) {
+    public init(width: Int, height: Int, data: [Position: ChessProtocol]) {
         self.init(width: width, height: height)
         data.forEach { self[$0.0] = .occupied($0.1) }
     }
