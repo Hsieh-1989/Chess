@@ -17,13 +17,23 @@ public struct ChineseChess: Chess {
         case soldier
     }
     
+    // MARK: - Property
     public var kind: Kind
     public var owner: Player
     public var moveValidation: MoveValidation { kind.validation }
     
+    // MARK: - Initializer
     public init(owner: Player, kind: Kind) {
         self.owner = owner
         self.kind = kind
+    }
+    
+    public static func red(_ kind: Kind) -> ChineseChess {
+        return .init(owner: .red, kind: kind)
+    }
+    
+    public static func black(_ kind: Kind) -> ChineseChess {
+        return .init(owner: .black, kind: kind)
     }
 }
 
@@ -35,36 +45,11 @@ extension ChineseChess: CustomStringConvertible {
 
 extension ChineseChess: RawRepresentable {
     public init?(rawValue: String) {
-        switch rawValue {
-        case .redKing:
-            self = ChineseChess(owner: .red, kind: .king)
-        case .redAssistant:
-            self = ChineseChess(owner: .red, kind: .assistant)
-        case .redElephant:
-            self = ChineseChess(owner: .red, kind: .elephant)
-        case .redHorse:
-            self = ChineseChess(owner: .red, kind: .horse)
-        case .redChariot:
-            self = ChineseChess(owner: .red, kind: .chariot)
-        case .redCannon:
-            self = ChineseChess(owner: .red, kind: .cannon)
-        case .redSoldier:
-            self = ChineseChess(owner: .red, kind: .soldier)
-        case .blackKing:
-            self = ChineseChess(owner: .black, kind: .king)
-        case .blackAssistant:
-            self = ChineseChess(owner: .black, kind: .assistant)
-        case .blackElephant:
-            self = ChineseChess(owner: .black, kind: .elephant)
-        case .blackHorse:
-            self = ChineseChess(owner: .black, kind: .horse)
-        case .blackChariot:
-            self = ChineseChess(owner: .black, kind: .chariot)
-        case .blackCannon:
-            self = ChineseChess(owner: .black, kind: .cannon)
-        case .blackSoldier:
-            self = ChineseChess(owner: .black, kind: .soldier)
-        default:
+        if let kind = Kind.red(rawValue) {
+            self = .red(kind)
+        } else if let kind = Kind.black(rawValue) {
+            self = .black(kind)
+        } else {
             return nil
         }
     }
@@ -77,7 +62,9 @@ extension ChineseChess: RawRepresentable {
     }
 }
 
+// MARK: - Private Helper
 extension ChineseChess.Kind {
+    
     fileprivate var validation: BaseMoveValidation {
         switch self {
         case .king: return .king
@@ -90,46 +77,53 @@ extension ChineseChess.Kind {
         }
     }
     
+    fileprivate static func red(_ value: String) -> ChineseChess.Kind? {
+        switch value {
+        case self.king.redName: return .king
+        case self.assistant.redName: return.assistant
+        case self.elephant.redName: return .elephant
+        case self.horse.redName: return .horse
+        case self.chariot.redName: return .chariot
+        case self.cannon.redName: return .cannon
+        case self.soldier.redName: return .soldier
+        default: return nil
+        }
+    }
+    
+    fileprivate static func black(_ value: String) -> ChineseChess.Kind? {
+        switch value {
+        case self.king.blackName: return .king
+        case self.assistant.blackName: return.assistant
+        case self.elephant.blackName: return .elephant
+        case self.horse.blackName: return .horse
+        case self.chariot.blackName: return .chariot
+        case self.cannon.blackName: return .cannon
+        case self.soldier.blackName: return .soldier
+        default: return nil
+        }
+    }
+    
     fileprivate var redName: String {
         switch self {
-        case .king: return .redKing
-        case .assistant: return .redAssistant
-        case .elephant: return .redElephant
-        case .horse: return .redHorse
-        case .chariot: return .redChariot
-        case .cannon: return .redCannon
-        case .soldier: return .redSoldier
+        case .king: return "帥"
+        case .assistant: return "仕"
+        case .elephant: return "相"
+        case .horse: return "傌"
+        case .chariot: return "俥"
+        case .cannon: return "炮"
+        case .soldier: return "兵"
         }
     }
     
     fileprivate var blackName: String {
         switch self {
-        case .king: return .blackKing
-        case .assistant: return .blackAssistant
-        case .elephant: return .blackElephant
-        case .horse: return .blackHorse
-        case .chariot: return .blackChariot
-        case .cannon: return .blackCannon
-        case .soldier: return .blackSoldier
+        case .king: return "將"
+        case .assistant: return "士"
+        case .elephant: return "象"
+        case .horse: return "馬"
+        case .chariot: return "車"
+        case .cannon: return "包"
+        case .soldier: return "卒"
         }
     }
-}
-
-extension String {
-    // red
-    fileprivate static let redKing = "帥"
-    fileprivate static let redAssistant = "仕"
-    fileprivate static let redElephant = "相"
-    fileprivate static let redHorse = "傌"
-    fileprivate static let redChariot = "俥"
-    fileprivate static let redCannon = "炮"
-    fileprivate static let redSoldier = "兵"
-    // black
-    fileprivate static let blackKing = "將"
-    fileprivate static let blackAssistant = "士"
-    fileprivate static let blackElephant = "象"
-    fileprivate static let blackHorse = "馬"
-    fileprivate static let blackChariot = "車"
-    fileprivate static let blackCannon = "包"
-    fileprivate static let blackSoldier = "卒"
 }
