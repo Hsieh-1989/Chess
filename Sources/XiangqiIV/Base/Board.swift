@@ -87,7 +87,7 @@ extension Board: Sequence {
 }
 
 // MARK: - CustomStringConvertible
-extension Board: CustomStringConvertible {
+extension Board: CustomStringConvertible where Chess: CustomStringConvertible {
     public var description: String {
         data.reduce(into: "") { result, line in
             defer { result += "\n" }

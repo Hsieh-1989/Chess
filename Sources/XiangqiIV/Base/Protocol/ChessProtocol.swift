@@ -5,7 +5,7 @@
 //  Created by Hsieh Min Che on 2020/2/24.
 //
 
-public protocol ChessProtocol: CustomStringConvertible {
+public protocol ChessProtocol {
     var owner: Player { get }
     var moveValidator: AnyMoveValidator<Self> { get }
 }
