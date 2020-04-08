@@ -16,8 +16,12 @@ public enum PositionStatus<Chess: ChessProtocol> {
         }
     }
     
-    public var owner: Player? {
+    public var chess: Chess? {
         guard case let .occupied(chess) = self else { return nil }
-        return chess.owner
+        return chess
+    }
+    
+    public var owner: Player? {
+        return chess?.owner
     }
 }
