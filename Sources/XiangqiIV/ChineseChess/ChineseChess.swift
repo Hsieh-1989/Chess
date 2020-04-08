@@ -20,7 +20,7 @@ public struct ChineseChess: Chess {
     // MARK: - Property
     public var kind: Kind
     public var owner: Player
-    public var moveValidation: MoveValidation { kind.validation }
+    public var moveValidator: MoveValidator { kind.validator }
     
     // MARK: - Initializer
     public init(owner: Player, kind: Kind) {
@@ -65,7 +65,7 @@ extension ChineseChess: RawRepresentable {
 // MARK: - Private Helper
 extension ChineseChess.Kind {
     
-    fileprivate var validation: BaseMoveValidation {
+    fileprivate var validator: AnyMoveValidator {
         switch self {
         case .king: return .king
         case .assistant: return .assistant

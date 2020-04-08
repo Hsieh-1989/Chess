@@ -1,11 +1,11 @@
 //
-//  MoveValidation.swift
+//  MoveValidator.swift
 //  XiangqiIV
 //
 //  Created by Hsieh Min Che on 2020/2/24.
 //
 
-public protocol MoveValidation {
+public protocol MoveValidator {
     func validate(
         player: Player,
         from original: Position,
