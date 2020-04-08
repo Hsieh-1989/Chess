@@ -19,7 +19,7 @@ final class ChessValidationTest: XCTestCase {
             ・・・・・
             ・・・・・
         """
-        XCTAssertEqual(
+        assertEqual(
             try validPath(at: Position(x: 1, y: 1), data: data),
             [
                 (1, 0),
@@ -38,7 +38,7 @@ final class ChessValidationTest: XCTestCase {
             ・・・・・
             ・・・・・
         """
-        XCTAssertEqual(
+        assertEqual(
             try validPath(at: Position(x: 1, y: 1), data: data),
             [
                 (0, 0), (2, 0),
@@ -56,7 +56,7 @@ final class ChessValidationTest: XCTestCase {
             ・・・・・
             兵・・・・
         """
-        XCTAssertEqual(
+        assertEqual(
             try validPath(at: Position(x: 2, y: 2), data: data),
             [
                 (0, 0),
@@ -74,7 +74,7 @@ final class ChessValidationTest: XCTestCase {
             ・・・・・
             ・兵・・・
         """
-        XCTAssertEqual(
+        assertEqual(
             try validPath(at: Position(x: 2, y: 2), data: data),
             [
                 (1, 0),
@@ -94,7 +94,7 @@ final class ChessValidationTest: XCTestCase {
             ・兵・・・
             ・・・・・
         """
-        XCTAssertEqual(
+        assertEqual(
             try validPath(at: Position(x: 1, y: 1), data: data),
             [
                 (1, 0),
@@ -114,7 +114,7 @@ final class ChessValidationTest: XCTestCase {
             ・・・・・
             ・・・・・
         """
-        XCTAssertEqual(
+        assertEqual(
             try validPath(at: Position(x: 0, y: 2), data: data),
             [
                 (1, 2), (2, 2), (4, 2),
@@ -133,7 +133,7 @@ final class ChessValidationTest: XCTestCase {
             ・・・・・
             ・・・・・
         """
-        XCTAssertEqual(
+        assertEqual(
             try validPath(at: Position(x: 1, y: 1), data: data),
             [
                 (1, 0),

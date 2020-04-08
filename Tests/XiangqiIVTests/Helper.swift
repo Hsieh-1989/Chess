@@ -32,7 +32,7 @@ extension Board {
     }
 }
 
-public func XCTAssertEqual(
+func assertEqual(
     _ expression1: @autoclosure () throws -> [Position],
     _ expression2: @autoclosure () throws -> [(Int, Int)],
     _ message: @autoclosure () -> String = "",
