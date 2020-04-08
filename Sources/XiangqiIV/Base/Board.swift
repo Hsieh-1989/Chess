@@ -7,7 +7,7 @@
 
 public struct Board<Chess: ChessProtocol> {
     
-    public struct Size {
+    public struct Size: Equatable {
         public let width: Int
         public let height: Int
         
@@ -17,6 +17,7 @@ public struct Board<Chess: ChessProtocol> {
         }
     }
     
+    // MARK: - Propperty
     public let size: Size
     private(set) var data: [[PositionStatus<Chess>]]
     
@@ -28,11 +29,13 @@ public struct Board<Chess: ChessProtocol> {
         )
     }
     
+    // MARK: - Initializer
     public init(width: Int, height: Int, data: [Position: Chess]) {
         self.init(width: width, height: height)
         data.forEach { self[$0.0] = .occupied($0.1) }
     }
     
+    // MARK: - Convenient Subscript
     public subscript(x: Int, y: Int) -> PositionStatus<Chess> {
         get {
             data[y][x]
@@ -54,11 +57,16 @@ public struct Board<Chess: ChessProtocol> {
         }
     }
     
+    // MARK: Private Helper
     private func isValid(on position: Position) -> Bool {
         position.x >= 0 && position.x < size.width && position.y >= 0 && position.y < size.height
     }
 }
 
+// MARK: - Equatable
+extension Board: Equatable where Chess: Equatable {}
+
+// MARK: - Sequence
 extension Board: Sequence {
     public __consuming func makeIterator() -> AnyIterator<(Position, PositionStatus<Chess>)> {
         var position: Position? = Position(x: 0, y: 0)
@@ -78,6 +86,7 @@ extension Board: Sequence {
     }
 }
 
+// MARK: - CustomStringConvertible
 extension Board: CustomStringConvertible {
     public var description: String {
         data.reduce(into: "") { result, line in
