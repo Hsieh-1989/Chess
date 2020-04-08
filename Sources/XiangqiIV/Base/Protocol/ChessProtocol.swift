@@ -7,11 +7,11 @@
 
 public protocol ChessProtocol: CustomStringConvertible {
     var owner: Player { get }
-    var moveValidator: MoveValidator { get }
+    var moveValidator: AnyMoveValidator<Self> { get }
 }
 
 extension ChessProtocol {
-    public func validPath(from original: Position, on board: Board) -> [Position] {
+    public func validPath(from original: Position, on board: Board<Self>) -> [Position] {
         board.compactMap {
             let (destination, _) = $0
             let valid = moveValidator.validate(player: owner, from: original, to: destination, on: board)

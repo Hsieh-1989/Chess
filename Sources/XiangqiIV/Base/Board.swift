@@ -5,7 +5,7 @@
 //  Created by Hsieh Min Che on 2020/2/24.
 //
 
-public struct Board {
+public struct Board<Chess: ChessProtocol> {
     
     public struct Size {
         public let width: Int
@@ -18,7 +18,7 @@ public struct Board {
     }
     
     public let size: Size
-    private(set) var data: [[PositionStatus]]
+    private(set) var data: [[PositionStatus<Chess>]]
     
     public init(width: Int, height: Int) {
         self.size = Size(width: width, height: height)
@@ -28,12 +28,12 @@ public struct Board {
         )
     }
     
-    public init(width: Int, height: Int, data: [Position: ChessProtocol]) {
+    public init(width: Int, height: Int, data: [Position: Chess]) {
         self.init(width: width, height: height)
         data.forEach { self[$0.0] = .occupied($0.1) }
     }
     
-    public subscript(x: Int, y: Int) -> PositionStatus {
+    public subscript(x: Int, y: Int) -> PositionStatus<Chess> {
         get {
             data[y][x]
         }
@@ -44,7 +44,7 @@ public struct Board {
         }
     }
     
-    public subscript(index: Position) -> PositionStatus {
+    public subscript(index: Position) -> PositionStatus<Chess> {
         get {
             data[index.y][index.x]
         }
@@ -60,7 +60,7 @@ public struct Board {
 }
 
 extension Board: Sequence {
-    public __consuming func makeIterator() -> AnyIterator<(Position, PositionStatus)> {
+    public __consuming func makeIterator() -> AnyIterator<(Position, PositionStatus<Chess>)> {
         var position: Position? = Position(x: 0, y: 0)
         return AnyIterator {
             guard let current = position else { return nil }

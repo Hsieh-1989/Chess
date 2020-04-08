@@ -5,13 +5,13 @@
 //  Created by Hsieh Min Che on 2020/2/24.
 //
 
-public struct AnyMoveValidator: MoveValidator {
+public struct AnyMoveValidator<Chess: ChessProtocol>: MoveValidator {
     
     public typealias Validator = (
         _ player: Player,
         _ original: Position,
         _ destination: Position,
-        _ board: Board
+        _ board: Board<Chess>
     ) -> Bool
     
     private let validator: Validator
@@ -32,7 +32,7 @@ public struct AnyMoveValidator: MoveValidator {
         player: Player,
         from original: Position,
         to destination: Position,
-        on board: Board
+        on board: Board<Chess>
     ) -> Bool {
         validator(player, original, destination, board)
     }

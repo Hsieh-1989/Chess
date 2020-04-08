@@ -5,9 +5,9 @@
 //  Created by Hsieh Min Che on 2020/2/24.
 //
 
-public enum PositionStatus {
+public enum PositionStatus<Chess: ChessProtocol> {
     case empty
-    case occupied(ChessProtocol)
+    case occupied(Chess)
     
     public var isEmpty: Bool {
         switch self {

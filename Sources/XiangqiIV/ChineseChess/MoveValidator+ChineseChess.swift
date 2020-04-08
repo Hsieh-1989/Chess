@@ -78,7 +78,7 @@ extension AnyMoveValidator {
         }
     }
     
-    internal static func linear(_ blockValidator: @escaping ([PositionStatus]) -> Bool) -> AnyMoveValidator {
+    internal static func linear(_ blockValidator: @escaping ([PositionStatus<Chess>]) -> Bool) -> AnyMoveValidator {
         linear && AnyMoveValidator { _, original, destination, board  in
             let status = original.linearSteps(to: destination).map { board[$0] }
             return blockValidator(status)
