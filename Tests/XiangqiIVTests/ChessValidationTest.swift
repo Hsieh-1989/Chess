@@ -156,7 +156,7 @@ final class ChessValidationTest: XCTestCase {
     
     // MARK: - Private Helper
     private func validPath(at position: Position, data: String) throws -> [Position] {
-        let validator = ChinessChessMoveValidator<BaseBoard>()
+        let validator = ChineseChessMoveValidator<BaseBoard>()
         let board = BaseBoard<ChineseChess>(string: data)
         return board.compactMap {
             let (destination, _) = $0

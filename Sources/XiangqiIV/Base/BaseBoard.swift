@@ -17,7 +17,7 @@ public struct BaseBoard<Chess: ChessProtocol>: BoardProtocol {
         }
     }
     
-    // MARK: - Propperty
+    // MARK: - Property
     public let size: Size
     private(set) var data: [[PositionStatus<Chess>]]
     

@@ -6,7 +6,7 @@
 //
 
 // MARK: Default Chinese Chess Validation
-struct ChinessChessMoveValidator<Board: BoardProtocol>: MoveValidator where Board.Chess == ChineseChess {
+struct ChineseChessMoveValidator<Board: BoardProtocol>: MoveValidator where Board.Chess == ChineseChess {
     
     func validate(from original: Position, to destination: Position, on board: Board) -> Bool {
         guard let chess = board[original].chess else {
