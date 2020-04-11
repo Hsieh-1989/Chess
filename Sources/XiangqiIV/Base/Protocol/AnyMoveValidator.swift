@@ -11,7 +11,7 @@ public struct AnyMoveValidator<Chess: ChessProtocol>: MoveValidator {
         _ player: Chess.Player,
         _ original: Position,
         _ destination: Position,
-        _ board: Board<Chess>
+        _ board: Chess.Board
     ) -> Bool
     
     private let validator: Validator
@@ -32,7 +32,7 @@ public struct AnyMoveValidator<Chess: ChessProtocol>: MoveValidator {
         player: Chess.Player,
         from original: Position,
         to destination: Position,
-        on board: Board<Chess>
+        on board: Chess.Board
     ) -> Bool {
         validator(player, original, destination, board)
     }

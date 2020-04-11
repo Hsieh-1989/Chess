@@ -11,6 +11,6 @@ public protocol MoveValidator {
         player: Chess.Player,
         from original: Position,
         to destination: Position,
-        on board: Board<Chess>
+        on board: Chess.Board
     ) -> Bool
 }

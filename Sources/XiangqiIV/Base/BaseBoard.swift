@@ -1,11 +1,11 @@
 //
-//  Board.swift
+//  BaseBoard.swift
 //  XiangqiIV
 //
 //  Created by Hsieh Min Che on 2020/2/24.
 //
 
-public struct Board<Chess: ChessProtocol> {
+public struct BaseBoard<Chess: ChessProtocol>: BoardProtocol {
     
     public struct Size: Equatable {
         public let width: Int
@@ -36,38 +36,26 @@ public struct Board<Chess: ChessProtocol> {
     }
     
     // MARK: - Convenient Subscript
-    public subscript(x: Int, y: Int) -> PositionStatus<Chess> {
-        get {
-            data[y][x]
-        }
-        mutating set {
-            let position = Position(x: x, y: y)
-            guard isValid(on: position) else { return }
-            data[y][x] = newValue
-        }
+    public func get(position: Position) -> PositionStatus<Chess> {
+        return data[position.y][position.x]
     }
     
-    public subscript(index: Position) -> PositionStatus<Chess> {
-        get {
-            data[index.y][index.x]
-        }
-        mutating set {
-            guard isValid(on: index) else { return }
-            data[index.y][index.x] = newValue
-        }
+    public mutating func set(_ status: PositionStatus<Chess>, at position: Position) {
+        guard isValid(on: position) else { return }
+        data[position.y][position.x] = status
     }
     
     // MARK: Private Helper
-    private func isValid(on position: Position) -> Bool {
+    public func isValid(on position: Position) -> Bool {
         position.x >= 0 && position.x < size.width && position.y >= 0 && position.y < size.height
     }
 }
 
 // MARK: - Equatable
-extension Board: Equatable where Chess: Equatable {}
+extension BaseBoard: Equatable where Chess: Equatable {}
 
 // MARK: - Sequence
-extension Board: Sequence {
+extension BaseBoard: Sequence {
     public __consuming func makeIterator() -> AnyIterator<(Position, PositionStatus<Chess>)> {
         var position: Position? = Position(x: 0, y: 0)
         return AnyIterator {
@@ -87,7 +75,7 @@ extension Board: Sequence {
 }
 
 // MARK: - CustomStringConvertible
-extension Board: CustomStringConvertible where Chess: CustomStringConvertible {
+extension BaseBoard: CustomStringConvertible where Chess: CustomStringConvertible {
     public var description: String {
         data.reduce(into: "") { result, line in
             defer { result += "\n" }

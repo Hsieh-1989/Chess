@@ -156,7 +156,7 @@ final class ChessValidationTest: XCTestCase {
     
     // MARK: - Private Helper
     private func validPath(at position: Position, data: String) throws -> [Position] {
-        let board = Board<ChineseChess>(string: data)
+        let board = BaseBoard<ChineseChess>(string: data)
         guard case let .occupied(chess) = board[position] else {
             throw "the testing board setup is wrong, current board: \n\(board)"
         }

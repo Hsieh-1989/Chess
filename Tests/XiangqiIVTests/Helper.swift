@@ -10,7 +10,7 @@ import XCTest
 
 extension String: Error {}
 
-extension Board where Chess == ChineseChess {
+extension BaseBoard where Chess == ChineseChess {
     init(string: String) {
         let array = string
             .split(separator: "\n")
@@ -28,7 +28,7 @@ extension Board where Chess == ChineseChess {
                 let position = Position(x: index % width, y: index / width)
                 result[position] = chess
         }
-        self = Board(width: width, height: height, data: data)
+        self = BaseBoard(width: width, height: height, data: data)
     }
 }
 

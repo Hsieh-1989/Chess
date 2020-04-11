@@ -7,6 +7,8 @@
 
 public struct ChineseChess: ChessProtocol, Equatable {
     
+    public typealias Board = BaseBoard<Self>
+    
     public enum Player: String, PlayerProtocol {
         case red
         case black
