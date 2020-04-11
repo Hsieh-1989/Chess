@@ -6,11 +6,8 @@
 //
 
 public protocol MoveValidator {
-    associatedtype Chess: ChessProtocol
-    func validate(
-        player: Chess.Player,
-        from original: Position,
-        to destination: Position,
-        on board: Chess.Board
-    ) -> Bool
+    
+    associatedtype Board: BoardProtocol
+
+    func validate(from original: Position, to destination: Position, on board: Board) -> Bool
 }

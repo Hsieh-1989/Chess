@@ -54,26 +54,6 @@ public struct BaseBoard<Chess: ChessProtocol>: BoardProtocol {
 // MARK: - Equatable
 extension BaseBoard: Equatable where Chess: Equatable {}
 
-// MARK: - Sequence
-extension BaseBoard: Sequence {
-    public __consuming func makeIterator() -> AnyIterator<(Position, PositionStatus<Chess>)> {
-        var position: Position? = Position(x: 0, y: 0)
-        return AnyIterator {
-            guard let current = position else { return nil }
-            defer {
-                let next = current + Position(x: 1, y: 0)
-                if self.isValid(on: next) {
-                    position = next
-                } else {
-                    let next = Position(x: 0, y: current.y + 1)
-                    position = self.isValid(on: next) ? next : nil
-                }
-            }
-            return (current, self[current])
-        }
-    }
-}
-
 // MARK: - CustomStringConvertible
 extension BaseBoard: CustomStringConvertible where Chess: CustomStringConvertible {
     public var description: String {

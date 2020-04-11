@@ -69,9 +69,9 @@ class BaseBoardTest: XCTestCase {
             case X
             case O
         }
-        
+    
+        var id: Player { owner }
         let owner: Player
-        let moveValidator = AnyMoveValidator<Self>(validator: { _, _, _, _ in false })
         
         static let X = Chess(owner: .X)
         static let O = Chess(owner: .O)

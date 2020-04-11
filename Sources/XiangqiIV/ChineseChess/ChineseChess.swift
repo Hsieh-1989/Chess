@@ -7,8 +7,6 @@
 
 public struct ChineseChess: ChessProtocol, Equatable {
     
-    public typealias Board = BaseBoard<Self>
-    
     public enum Player: String, PlayerProtocol {
         case red
         case black
@@ -25,14 +23,13 @@ public struct ChineseChess: ChessProtocol, Equatable {
     }
     
     // MARK: - Property
-    public var kind: Kind
+    public var id: Kind
     public var owner: Player
-    public var moveValidator: AnyMoveValidator<ChineseChess> { kind.validator }
     
     // MARK: - Initializer
     public init(owner: Player, kind: Kind) {
         self.owner = owner
-        self.kind = kind
+        self.id = kind
     }
     
     public static func red(_ kind: Kind) -> ChineseChess {
@@ -63,27 +60,15 @@ extension ChineseChess: RawRepresentable {
     
     public var rawValue: String {
         switch owner {
-        case .red: return kind.redName
-        case .black: return kind.blackName
+        case .red: return id.redName
+        case .black: return id.blackName
         }
     }
 }
 
 // MARK: - Private Helper
 extension ChineseChess.Kind {
-    
-    fileprivate var validator: AnyMoveValidator<ChineseChess> {
-        switch self {
-        case .king: return .king
-        case .assistant: return .assistant
-        case .elephant: return .elephant
-        case .horse: return .horse
-        case .chariot: return .chariot
-        case .cannon: return .cannon
-        case .soldier: return .soldier
-        }
-    }
-    
+
     fileprivate static func red(_ value: String) -> ChineseChess.Kind? {
         switch value {
         case self.king.redName: return .king
