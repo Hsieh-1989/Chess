@@ -48,3 +48,12 @@ func assertEqual(
     )
 }
 
+extension Sequence {
+    func debug(tag: String? = nil) -> Self {
+        if let tag = tag {
+            print("=== \(tag) ===")
+        }
+        dump(self)
+        return self
+    }
+}
