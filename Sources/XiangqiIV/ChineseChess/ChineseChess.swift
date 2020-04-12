@@ -5,7 +5,7 @@
 //  Created by Hsieh Min Che on 2020/2/24.
 //
 
-public struct ChineseChess: ChessProtocol, Equatable {
+public struct ChineseChess: ChessProtocol {
     
     public enum Player: String, PlayerProtocol {
         case red
