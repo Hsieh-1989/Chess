@@ -10,7 +10,7 @@ struct ChineseChessMoveValidator<Board: BoardProtocol>: MoveValidator where Boar
     
     func validate(from original: Position, to destination: Position, on board: Board) -> Bool {
         guard let chess = board[original].chess else {
-            assertionFailure("original position should have chess")
+            assertionFailure("original position should have a chess")
             return false
         }
         let validator: AnyMoveValidator<Board> = {
