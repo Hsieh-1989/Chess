@@ -10,7 +10,7 @@ import XCTest
 
 extension String: Error {}
 
-extension BaseBoard where Chess == ChineseChess {
+extension BaseBoard where Chess: RawRepresentable, Chess.RawValue == String {
     init(string: String) {
         let array = string
             .split(separator: "\n")
@@ -22,9 +22,9 @@ extension BaseBoard where Chess == ChineseChess {
         let data = array
             .joined()
             .enumerated()
-            .reduce(into: [Position: ChineseChess]()) { result, current in
+            .reduce(into: [Position: Chess]()) { result, current in
                 let (index, character) = current
-                guard let chess = ChineseChess(rawValue: String(character)) else { return }
+                guard let chess = Chess(rawValue: String(character)) else { return }
                 let position = Position(x: index % width, y: index / width)
                 result[position] = chess
         }

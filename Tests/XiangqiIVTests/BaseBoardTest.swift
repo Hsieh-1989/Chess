@@ -11,7 +11,7 @@ import XCTest
 class BaseBoardTest: XCTestCase {
     
     func testBoardInitialState() {
-        let board = BaseBoard<Chess>(width: 3, height: 4)
+        let board = BaseBoard<MockChess>(width: 3, height: 4)
         XCTAssertEqual(board.size, BaseBoard.Size(width: 3, height: 4))
         XCTAssertEqual(
             board.data,
@@ -26,7 +26,7 @@ class BaseBoardTest: XCTestCase {
     
     func testBoardInitialWithoutData() {
         
-        let board = BaseBoard<Chess>(width: 3, height: 4)
+        let board = BaseBoard<MockChess>(width: 3, height: 4)
         
         XCTAssertEqual(board.size, BaseBoard.Size(width: 3, height: 4))
         XCTAssertEqual(
@@ -42,7 +42,7 @@ class BaseBoardTest: XCTestCase {
     
     func testBoardInitialWithData() {
         
-        let board = BaseBoard<Chess>(width: 3, height: 3, data: [
+        let board = BaseBoard<MockChess>(width: 3, height: 3, data: [
             .init(x: 0, y: 0): .X,
             .init(x: 1, y: 1): .X,
             .init(x: 2, y: 2): .X,
@@ -58,33 +58,5 @@ class BaseBoardTest: XCTestCase {
                 [.occupied(.O), .empty, .occupied(.X)]
             ]
         )
-    }
-    
-    // MARK: Mock Chess
-    private struct Chess: ChessProtocol, Equatable, CustomStringConvertible {
-        
-        typealias Board = BaseBoard<Chess>
-        
-        enum Player: String, PlayerProtocol {
-            case X
-            case O
-        }
-    
-        var id: Player { owner }
-        let owner: Player
-        
-        static let X = Chess(owner: .X)
-        static let O = Chess(owner: .O)
-        
-        static func == (lhs: BaseBoardTest.Chess, rhs: BaseBoardTest.Chess) -> Bool {
-            return lhs.owner == rhs.owner
-        }
-        
-        var description: String {
-            switch owner {
-            case .X: return "X"
-            case .O: return "O"
-            }
-        }
     }
 }
