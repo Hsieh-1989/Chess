@@ -1,17 +1,13 @@
 //
-//  WinningConditions.swift
+//  Rule+Connect.swift
 //  XiangqiIV
 //
-//  Created by Hsieh Min Che on 2020/2/24.
+//  Created by Hsieh Min Che on 2020/4/18.
 //
 
-public struct WinningConditions<Board: BoardProtocol> {
-    public let verify: (Board) -> Board.Chess.Player?
-}
-
-extension WinningConditions {
-    public static func connect(length: Int) -> WinningConditions {
-        WinningConditions { board in
+extension BaseWinningRule {
+    public static func connect(length: Int) -> BaseWinningRule {
+        BaseWinningRule { board in
             for data in board {
                 guard let data = data as? (Position, PositionStatus<Board.Chess>), let player = data.1.chess?.owner else {
                     continue
@@ -45,3 +41,4 @@ private func isConnected<Board: BoardProtocol>(
         check(along: .init(x: 0, y: 1)) ||
         check(along: .init(x: -1, y: 1))
 }
+

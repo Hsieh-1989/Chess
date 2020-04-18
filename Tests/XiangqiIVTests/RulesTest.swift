@@ -1,5 +1,5 @@
 //
-//  WinningConditionsTest.swift
+//  RulesTest.swift
 //  XiangqiIVTests
 //
 //  Created by Hsieh Min Che on 2020/4/12.
@@ -9,7 +9,7 @@ import XCTest
 
 @testable import XiangqiIV
 
-class WinningConditionsTest: XCTestCase {
+class RulesTest: XCTestCase {
     
     typealias Board = BaseBoard<MockChess>
     
@@ -105,7 +105,7 @@ class WinningConditionsTest: XCTestCase {
     }
     
     
-    private func makeSUT(length: Int) -> WinningConditions<Board> {
-        return WinningConditions<Board>.connect(length: length)
+    private func makeSUT(length: Int) -> BaseWinningRule<Board> {
+        return BaseWinningRule<Board>.connect(length: length)
     }
 }
