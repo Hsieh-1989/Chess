@@ -5,9 +5,11 @@
 //  Created by Hsieh Min Che on 2020/4/18.
 //
 
-extension BaseWinningRule {
-    public static func connect(length: Int) -> BaseWinningRule {
-        BaseWinningRule { board in
+public typealias BaseWinningRule<Board: BoardProtocol> = AnyRule<Board, Board.Chess.Player?>
+
+extension AnyRule where Result == Self.Board.Chess.Player? {
+    public static func connect(length: Int) -> AnyRule {
+        AnyRule { board in
             for data in board {
                 guard let data = data as? (Position, PositionStatus<Board.Chess>), let player = data.1.chess?.owner else {
                     continue
