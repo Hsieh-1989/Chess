@@ -9,7 +9,7 @@ import XiangqiIV
 
 struct MockChess: ChessProtocol, Equatable, CustomStringConvertible {
     
-    enum Player: String, PlayerProtocol {
+    enum Player: String, PlayerProtocol, CaseIterable {
         case X
         case O
     }
